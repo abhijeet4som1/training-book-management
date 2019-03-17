@@ -17,15 +17,20 @@ public class AbstractBaseController {
     }
 
     protected ResponseEntity<ResponseModel> ok(String message) {
-        return new ResponseEntity<ResponseModel>(new ResponseModel(CommonConstants.ErrorCode.SUCCESS, message, null), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseModel(CommonConstants.ErrorCode.SUCCESS, message, null), HttpStatus.OK);
     }
 
     protected <T> ResponseEntity<T> ok(T message) {
-        return new ResponseEntity<T>(message, HttpStatus.OK);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
     protected <T> ResponseEntity<T> created(T message) {
-        return new ResponseEntity<T>(message, HttpStatus.CREATED);
+        return new ResponseEntity<>(message, HttpStatus.CREATED);
+    }
+
+    protected ResponseEntity<ResponseModel> failure(String message) {
+        return new ResponseEntity<>(
+                new ResponseModel(CommonConstants.ErrorCode.BAD_REQUEST_ERROR, message, null), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler
