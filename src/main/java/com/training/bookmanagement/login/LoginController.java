@@ -19,7 +19,9 @@ public class LoginController extends AbstractBaseController {
     public ResponseEntity saveBooks(@RequestBody @Valid LoginDto loginDto, HttpServletResponse response) {
         if ("test".equals(loginDto.getUserName())
                 && "patanahi".equals(loginDto.getPassword())) {
-            response.addCookie(new Cookie("access-token", "test-token"));
+            Cookie cookie = new Cookie("access-token", "test-token");
+            cookie.setPath("/");
+            response.addCookie(cookie);
             return ok();
         }
         return failure("Username or password didn't match.");
